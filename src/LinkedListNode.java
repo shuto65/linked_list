@@ -9,7 +9,7 @@ public class LinkedListNode {
 	}
 	
 	public void appendTail(int d){
-		if(this.head == null){
+		if(head == null){
 			head = new LinkedListNode(d);
 			return;
 		}
@@ -19,7 +19,10 @@ public class LinkedListNode {
 		while(node.next != null){
 			node = node.next;
 		}
-		this.next = new LinkedListNode(d);
+		this.next = new LinkedListNode(d);	
+	}
+	
+	public void printList(){
 		
 	}
 	
