@@ -9,6 +9,7 @@ import java.util.HashSet;
 import org.junit.Test;
 
 import DataStructure.LinkedList;
+import DataStructure.LinkedList.Counter;
 import DataStructure.LinkedList.Node;
 public class LinkedListNodeTest {
 
@@ -63,7 +64,7 @@ public class LinkedListNodeTest {
 	
 	@Test
 	public void hmapのテスト(){
-		HashSet hset = new HashSet();
+		HashSet<Node> hset = new HashSet<Node>();
 		LinkedList list = new LinkedList(1,2,3,3);
 		hset.add(list.findNode(2));
 		hset.add(list.findNode(1));
@@ -72,4 +73,22 @@ public class LinkedListNodeTest {
 		
 		
 	}
+	
+	@Test
+	public void getXthFromTailのテスト(){
+		LinkedList list = new LinkedList(1,2,3,4,5);
+		
+		Node node = list.getXthFromTail(5);
+		assertThat(node.getItem(), is(1));
+	}
+	
+	@Test
+	public void getXthFromTailesRecursiveのテスト(){
+		LinkedList list = new LinkedList(1,2,3,4,5);
+		
+		Counter c = list.new Counter();
+		Node node = list.getXthFromTailRecursive(list.getHead(), 5, c);
+		assertThat(node.getItem(), is(1));
+	}
+	
 }

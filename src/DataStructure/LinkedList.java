@@ -171,11 +171,13 @@ public class LinkedList{
 		node.d = 0;
 		node.next = null;
 	}
+	
+	
 	public LinkedList dedup(){
 		if(head == null){
 			return this;
 		}
-		HashSet hset = new HashSet();
+		HashSet<Node> hset = new HashSet<Node>();
 			
 		Node prev = head;
 		Node current = prev.next;
@@ -197,25 +199,57 @@ public class LinkedList{
 		return this;
 		
 	}	
-	
+	/**
+	 * 問2-2 解答．いいインスタンス名が思いつかん
+	 * @param index
+	 * @return
+	 */
 	public Node getXthFromTail(int index){
 		if(!isIndexInBound(index)){
 			throw new IndexOutOfBoundsException();
 		}
-		return this.findNode(size - index - 1);
+		
+		Node node1 = this.head;
+		Node node2 = node1;
+		
+		for(int k = 0; k < index - 1; k ++){
+			node2 = node2.next;
+		}
+		
+		while(node2.next != null){
+			node1 = node1.next;
+			node2 = node2.next;
+		}
+		
+		return node1;
+		
 	}
 	
-	public Node getXthFromTailRecursive(int index){
+	
+	
+	
+	/**
+	 * 問2-2 再帰で解いてみた版
+	 *
+	 */
+	public class Counter{
+		int val=0;
+	}
+	public Node getXthFromTailRecursive(Node head, int index, Counter c){
 		if(!isIndexInBound(index)){
 			throw new IndexOutOfBoundsException();
 		}
-		return lookupRecursive(this.head, index);
+		if(head == null){
+			return null;
+		}
+		
+		Node node = getXthFromTailRecursive(head.next, index, c);
+		
+		if(c.val < index){
+			c.val += 1;
+			return head;
+		}
+		return node;
 		
 	}
-	
-	public Node lookupRecursive(Node node, int index){
-		if(node.next != null)
-			return lookupRecursive(node.next, index);
-		
 	}
-}
